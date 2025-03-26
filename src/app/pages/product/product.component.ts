@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Product } from '../../types/products';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products/products.service';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
