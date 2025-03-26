@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from '../../types/products';
 import { Router } from '@angular/router';
+import { ProductsService } from '../../services/products/products.service';
 
 @Component({
   selector: 'app-products',
@@ -10,32 +11,21 @@ import { Router } from '@angular/router';
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
-  products: Product[] = [
-    {
-      id: 1,
-      title: 'Producto 1',
-      price: 109.95,
-      description:
-        'descripción',
-      category: "category",
-      image: 'https://via.placeholder.com/150',
-      rating: { rate: 3.9, count: 120 }
-    },
-    {
-      id: 2,
-      title: 'Producto 2',
-      price: 99.95,
-      description:
-        'descripción',      
-      category: "category",
-      image: 'https://via.placeholder.com/150',
-      rating: { rate: 4.9, count: 120 }
-    },
-  ];
+  products: Product[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private productsService: ProductsService) {}
+
+  ngOnInit(){
+    this.getProducts();
+  }
 
   goToProduct(id: number) {
     this.router.navigate(['/products', id]);
+  }
+
+  getProducts() {
+    this.productsService.getProducts().subscribe(products => {
+      this.products = products;
+    });
   }
 }
