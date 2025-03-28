@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CartService } from '../../services/cart/cart.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,4 +12,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavBarComponent {
 
+  constructor(private cartService: CartService, private authService: AuthService) { }
+
+  openCart() {
+    this.cartService.showCart();
+  }
+
+  login(){
+    this.authService.loginWithGoogle();
+  }
 }
