@@ -18,7 +18,13 @@ export class NavBarComponent {
     this.cartService.showCart();
   }
 
-  login(){
-    this.authService.loginWithGoogle();
+  getCurrentUser(){
+    return this.authService.getCurrentUser();
+  }
+
+  logout(){
+    this.authService.logout()
+      .then(() => console.log("Logout exitoso"))
+      .catch(err => console.log(err));
   }
 }

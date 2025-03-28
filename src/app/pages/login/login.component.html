@@ -1,0 +1,68 @@
+<div class="container-fluid text-center" style="width: 30%;">
+    <form class="d-flex flex-column gap-3" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo</label>
+            <input formControlName="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            @if((email?.hasError("required") || email?.hasError("email")) && email?.touched) {
+                <div class="text-danger">
+                    Correo inválido
+                </div>
+            }
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input formControlName="password" type="password" class="form-control" id="password">
+            @if(password?.hasError("required") && password?.touched) {
+                <div class="text-danger">
+                    Contraseña requerida
+                </div>                
+            }
+            @if(password?.hasError("minlength") && password?.touched) {
+                <div class="text-danger">
+                    La contraseña debe tener al menos 6 caracteres
+                </div>
+            }
+        </div>
+        @if(showRegister){
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword">            
+                @if(confirmPassword?.hasError("confirmPassword") && confirmPassword?.touched) {
+                    <div class="text-danger">
+                        Las contraseñas no coinciden
+                    </div>
+                }
+            </div>            
+        }
+        <div class="vstack gap-2 mx-auto" style="width: 70%;">
+            <button type="submit" class="btn btn-primary">
+                @if(showRegister){
+                    Registrarse
+                } @else {
+                    Iniciar sesión
+                }
+            </button>
+            <button type="button" class="btn btn-success" (click)="registerWithGoogle()">
+                <div class="d-flex justify-content-center align-items-center">
+                    Iniciar sesión con Google
+                    <ng-icon icon="bootstrapGoogle"></ng-icon>
+                </div>
+            </button>
+        </div>
+        <span>
+            @if(showRegister){
+                ¿Ya tienes una cuenta? 
+                <a class="link-primary" (click)="toggleRegister()">Inicia sesión</a>
+            } @else {
+                No tienes una cuenta? 
+                <a class="link-primary" (click)="toggleRegister()">Regístrate</a>
+            }
+        </span>
+        @if(errorMessage){
+            <div>
+                <span class="text-danger">{{errorMessage}}</span>
+            </div>
+        }
+    </form>
+    <ng-icon icon="bootstrapGoogle"></ng-icon>
+</div>
