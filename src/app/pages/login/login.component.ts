@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, ValidatorFn, A
 import { AuthService } from '../../services/auth/auth.service';
 import { NgIconComponent, provideIcons } from "@ng-icons/core";
 import { bootstrapGoogle } from "@ng-icons/bootstrap-icons";
+import { UsersService } from '../../services/users/users.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,11 @@ export class LoginComponent {
   errorMessage: string = "";
   showRegister: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService){
+  constructor(
+    private formBuilder: FormBuilder, 
+    private authService: AuthService,
+    private usersService: UsersService
+  ){
     this.loginForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(6)]],
@@ -32,6 +37,7 @@ export class LoginComponent {
       this.authService.registerWithEmail(this.email?.value, this.password?.value)
         .then(() => {
           this.errorMessage = "";
+          this.usersService.loadUserInFirebase();
         })
         .catch(err => {
           console.log(err);
@@ -42,6 +48,7 @@ export class LoginComponent {
     this.authService.loginWithEmail(this.email?.value, this.password?.value)
       .then(() => {
         this.errorMessage = "";
+        this.usersService.loadUserInFirebase();
       })
       .catch(err => {
         console.log(err);
@@ -53,6 +60,7 @@ export class LoginComponent {
     this.authService.loginWithGoogle()
       .then(() => {
         this.errorMessage = "";
+        this.usersService.loadUserInFirebase();
       })
       .catch(err => {
         console.log(err);
