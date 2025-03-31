@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductsService } from '../../services/products/products.service';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-form',
@@ -18,7 +19,8 @@ export class ProductFormComponent {
     private productsService: ProductsService, 
     private formBuilder: FormBuilder,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private sanitizer: DomSanitizer 
   ) {
     this.form = this.formBuilder.group({
       title: ["", [Validators.required]],

@@ -12,6 +12,7 @@ import { ProductsService } from '../../services/products/products.service';
 })
 export class ProductComponent {
   product: Product | undefined;
+sanitizer: any;
 
   constructor(private activatedRoute: ActivatedRoute, private productsService: ProductsService) {}
 

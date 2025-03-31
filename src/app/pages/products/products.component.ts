@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products/products.service';
 import { CartService } from '../../services/cart/cart.service';
 import { UsersService } from '../../services/users/users.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-products',
@@ -20,7 +21,8 @@ export class ProductsComponent {
     private router: Router, 
     private productsService: ProductsService,
     private cartService: CartService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(){

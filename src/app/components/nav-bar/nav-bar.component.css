@@ -1,4 +1,62 @@
+/* Barra de navegación */
+.navbar {
+    background-color: #007BFF; /* Color de fondo azul */
+    border-bottom: 3px solid #0056b3; /* Línea inferior */
+}
 
-.active{
-    color: #0d6efd !important;
+.navbar .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000000;
+}
+
+/* Estilo para el contenedor de los íconos */
+.navbar .hstack {
+    display: flex;
+    align-items: center; /* Alineación vertical de los íconos */
+    gap: 10px; /* Espacio entre los íconos */
+}
+
+/* Estilo del ícono del carrito */
+.bi-cart {
+    color: #000000;
+    font-size: 1.5rem;
+}
+
+/* Estilo del ícono de usuario */
+.bi-person-circle, .bi-person-check {
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+
+/* Estilos para la imagen del usuario */
+.navbar .hstack img {
+    border: 2px solid #8214cc;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto hover para la imagen del usuario */
+.navbar .hstack img:hover {
+    transform: scale(1.1);
+}
+
+/* Asegura que los íconos estén a la misma altura y cercanos */
+.navbar .hstack a {
+    display: flex;
+    align-items: center;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .navbar .hstack {
+        gap: 8px; /* Reduce el espacio entre los íconos */
+    }
+
+    .bi-cart, .bi-person-circle, .bi-person-check {
+        font-size: 1.3rem; /* Ajuste del tamaño de los íconos */
+    }
 }

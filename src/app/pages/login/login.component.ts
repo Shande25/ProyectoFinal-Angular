@@ -26,35 +26,46 @@ export class LoginComponent {
     this.loginForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ["", [this.confirmPasswordValidator()]]
+      confirmPassword: ["", [this.confirmPasswordValidator()]],
+      firstName: ["", [Validators.required]],  
+      lastName: ["", [Validators.required]],  
+      age: [0, [Validators.required]]  
     });
   }
 
-  login(){
+  login() {
     if(this.email?.invalid || this.password?.invalid) return;
+
     if(this.showRegister){
-      if(this.confirmPassword?.invalid) return;
-      this.authService.registerWithEmail(this.email?.value, this.password?.value)
+        if(this.confirmPassword?.invalid) return;
+
+        this.authService.registerWithEmail(this.email?.value, this.password?.value)
+            .then(() => {
+                this.errorMessage = "";
+
+                this.usersService.loadUserInFirebase(
+                    this.firstName?.value,  
+                    this.lastName?.value,  
+                    this.age?.value  
+                );
+            })
+            .catch(err => {
+                console.log(err);
+                this.errorMessage = err.message;
+            });
+        return;
+    }
+
+    this.authService.loginWithEmail(this.email?.value, this.password?.value)
         .then(() => {
-          this.errorMessage = "";
-          this.usersService.loadUserInFirebase();
+            this.errorMessage = "";
+            this.usersService.loadUserInFirebase();
         })
         .catch(err => {
-          console.log(err);
-          this.errorMessage = err.message;
+            console.log(err);
+            this.errorMessage = err.message;
         });
-      return;
-    }
-    this.authService.loginWithEmail(this.email?.value, this.password?.value)
-      .then(() => {
-        this.errorMessage = "";
-        this.usersService.loadUserInFirebase();
-      })
-      .catch(err => {
-        console.log(err);
-        this.errorMessage = err.message;
-      });
-  }
+}
 
   registerWithGoogle(){
     this.authService.loginWithGoogle()
@@ -75,6 +86,9 @@ export class LoginComponent {
   get email() { return this.loginForm.get("email") };
   get password() { return this.loginForm.get("password") };
   get confirmPassword() { return this.loginForm.get("confirmPassword") };
+  get firstName() { return this.loginForm.get("firstName") };  
+  get lastName() { return this.loginForm.get("lastName") };  
+  get age() { return this.loginForm.get("age") };  
 
   confirmPasswordValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
