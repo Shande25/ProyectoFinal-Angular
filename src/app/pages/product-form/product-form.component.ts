@@ -26,6 +26,7 @@ export class ProductFormComponent {
       price: [0, [Validators.required]],
       category: [""],
       image: [""],
+      image2: [""],
       rating: [{rate: 0, count: 0}]
     })
   }

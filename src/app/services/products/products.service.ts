@@ -18,9 +18,6 @@ import {
   providedIn: 'root'
 })
 export class ProductsService {
-
-  private url = 'https://fakestoreapi.com/products';
-
   constructor(private http: HttpClient, private firestore: Firestore) { }
 
   getProducts(): Observable<Product[]> {

@@ -15,15 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideNgIconsConfig({
       size: "1.5em",
-    }), 
-    provideFirebaseApp(() => initializeApp({
-      "projectId":"app-nucleo-mar",
-      "appId":"1:995672471006:web:7d4e5bde82dcaa6110d94f",
-      "storageBucket":"app-nucleo-mar.firebasestorage.app",
-      "apiKey":"AIzaSyByEJ-kA9ewPabbp7oSri0MTgHH2fyjeMU",
-      "authDomain":"app-nucleo-mar.firebaseapp.com",
-      "messagingSenderId":"995672471006"})), 
-    provideAuth(() => getAuth()), 
-    provideFirestore(() => getFirestore())
+    }), provideFirebaseApp(() => initializeApp({"projectId":"finalnucleo","appId":"1:435537655718:web:52425a7e6766b8f9698167","storageBucket":"finalnucleo.firebasestorage.app","apiKey":"AIzaSyCM4Waw1zJplo0VbsIQlQXOUdVZZTlK8lI","authDomain":"finalnucleo.firebaseapp.com","messagingSenderId":"435537655718"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), 
   ]
 };
